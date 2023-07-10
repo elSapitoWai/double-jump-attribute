@@ -4,8 +4,6 @@ import amymialee.doublejumpattribute.DoubleJumpAttribute;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -13,9 +11,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.Wearable;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -27,11 +22,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class JumpBootsItem extends ArmorItem implements Wearable {
+public class JumpBootsItem extends ArmorItem {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public JumpBootsItem(Settings settings) {
-        super(new JumpBootsArmourMaterial(), EquipmentSlot.FEET, settings);
+        super(new JumpBootsArmourMaterial(), Type.BOOTS, settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(DoubleJumpAttribute.JUMPS, new EntityAttributeModifier(UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), "Jump Modifier", 1, EntityAttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
@@ -53,12 +48,12 @@ public class JumpBootsItem extends ArmorItem implements Wearable {
 
     static class JumpBootsArmourMaterial implements ArmorMaterial {
         @Override
-        public int getDurability(EquipmentSlot slot) {
+        public int getDurability(Type type) {
             return 0;
         }
 
         @Override
-        public int getProtectionAmount(EquipmentSlot slot) {
+        public int getProtection(Type type) {
             return 4;
         }
 

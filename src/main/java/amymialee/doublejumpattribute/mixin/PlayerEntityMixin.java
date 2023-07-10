@@ -54,7 +54,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements DoubleJu
             this.setVelocity(vec3d.x, d * 1.5 * j, vec3d.z);
         }
         this.velocityDirty = true;
-        if (this.world.isClient) {
+        if (this.getWorld().isClient) {
             sendPacketClient();
         }
     }
